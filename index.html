@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Periplum — chronological history maps</title>
+<meta name="description" content="Periplum is a tiny, config-driven engine for chronological history maps: a sequence of dated points placed on Earth, the Moon, Mars, or the celestial sphere, connected as a route with timeline playback and a date slider.">
+<meta property="og:title" content="Periplum — chronological history maps">
+<meta property="og:description" content="A voyage log on a map: dated points across Earth, the Moon, Mars, or the night sky, with timeline playback.">
+<meta property="og:type" content="website">
+<style>
+  :root { --bg:#0e1320; --panel:#161d2e; --ink:#e8ecf6; --muted:#9aa6c2; --accent:#f0b429; --link:#6db1ff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.55; }
+  a { color:var(--link); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 64px 0 32px; text-align:center; }
+  h1 { font-size: 2.6rem; margin: 0 0 8px; letter-spacing: .5px; }
+  .tag { color:var(--muted); font-size: 1.15rem; margin: 0 auto; max-width: 640px; }
+  .etym { color:var(--muted); font-size:.92rem; font-style:italic; margin-top:14px; }
+  h2 { margin: 40px 0 14px; font-size: 1.3rem; }
+  .cards { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .card { background:var(--panel); border:1px solid #243049; border-radius:10px; padding:16px 18px; text-decoration:none; color:var(--ink); transition:border-color .15s, transform .15s; display:block; }
+  .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card .ico { font-size:1.7rem; }
+  .card h3 { margin:6px 0 4px; font-size:1.05rem; }
+  .card p { margin:0; color:var(--muted); font-size:.9rem; }
+  pre { background:#0a0f1a; border:1px solid #243049; border-radius:10px; padding:16px; overflow-x:auto; font-size:.83rem; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  ol { padding-left: 1.2rem; } ol li { margin: 6px 0; }
+  footer { margin: 56px 0 40px; color:var(--muted); font-size:.9rem; border-top:1px solid #243049; padding-top:20px; text-align:center; }
+  .pill { display:inline-block; background:#243049; border-radius:999px; padding:3px 10px; font-size:.8rem; color:var(--muted); margin:2px; }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>Periplum 🧭</h1>
+  <p class="tag">A tiny, config-driven engine for <strong>chronological history maps</strong> — a sequence of dated points placed on Earth, the Moon, Mars, or the celestial sphere, connected as a route, with timeline playback and a date slider.</p>
+  <p class="etym">περίπλους — “a sailing-around”: an account of a coastal voyage.</p>
+</header>
+
+<main class="wrap">
+  <h2>Live examples</h2>
+  <div class="cards">
+    <a class="card" href="https://periplum.github.io/magellan/">
+      <div class="ico">🌍</div><h3>Magellan</h3>
+      <p>The first circumnavigation (1519–1522), stop by stop.</p></a>
+    <a class="card" href="https://periplum.github.io/worldcup-soccer/">
+      <div class="ico">⚽</div><h3>World Cup</h3>
+      <p>Every men's World Cup final, 1930–2026, by host city.</p></a>
+    <a class="card" href="https://periplum.github.io/lunar/">
+      <div class="ico">🌙</div><h3>Lunar landings</h3>
+      <p>Crewed &amp; robotic Moon landings on a lunar basemap.</p></a>
+  </div>
+  <p style="margin-top:10px"><span class="pill">Earth tiles</span><span class="pill">Moon / Mars imagery</span><span class="pill">celestial RA/Dec</span><span class="pill">timeline playback</span><span class="pill">date slider</span></p>
+
+  <h2>Make your own in minutes</h2>
+  <ol>
+    <li>Open the <a href="https://github.com/periplum/periplum">template</a> → <strong>“Use this template”</strong>.</li>
+    <li>Edit <code>index.html</code> (title, basemaps, colours) and <code>data.json</code> (your points).</li>
+    <li><strong>Settings → Pages</strong> → deploy from <code>main</code>. Your map is live.</li>
+  </ol>
+  <pre><code>&lt;script src="https://cdn.jsdelivr.net/gh/periplum/periplum-core@v0.1.2/dist/periplum.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+Periplum.render({
+  title: "My voyage",
+  dataUrl: "data.json",
+  basemaps: [{ id:"earth", name:"🌍 Earth", type:"tiles",
+    tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attribution:"&copy; OpenStreetMap", minZoom:2, initialView:[20,0], initialZoom:2 }],
+  statusColors: { "outbound":"#1f77b4", "return":"#2ca02c" }
+});
+&lt;/script&gt;</code></pre>
+  <p>Each data item carries one or more <em>placements</em> (a basemap id + coordinates). See the
+  <a href="https://github.com/periplum/periplum-core#data-contract">data contract</a>.</p>
+</main>
+
+<footer class="wrap">
+  <a href="https://github.com/periplum/periplum-core">engine</a> ·
+  <a href="https://github.com/periplum/periplum">template</a> ·
+  <a href="https://github.com/periplum">github.com/periplum</a>
+</footer>
+</body>
+</html>
